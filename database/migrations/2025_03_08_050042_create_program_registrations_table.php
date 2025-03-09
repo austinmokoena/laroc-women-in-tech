@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('program_registrations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('full_names');
+            $table->string('surname');
+            $table->string('cell_number');
+            $table->string('id_number');
+            $table->integer('age');
+            $table->string('address');
+            // File paths for documents (nullable until uploaded)
+            $table->string('id_document')->nullable();
+            $table->string('proof_of_address')->nullable();
             $table->timestamps();
         });
     }
