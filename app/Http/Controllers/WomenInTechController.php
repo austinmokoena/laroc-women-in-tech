@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProgramRegistration;
 use Illuminate\Http\Request;
+use App\Models\ProgramRegistration;
+use App\Notifications\ApplicationSubmitted;
 
 class WomenInTechController extends Controller
 {
@@ -70,6 +71,9 @@ class WomenInTechController extends Controller
 
         $registration->status = 'pending'; // Set status to pending
         $registration->save();
+
+        // Send application submitted notification
+        auth()->user()->notify(new ApplicationSubmitted());
 
         return redirect()->route('dashboard')->with('status', 'Your application has been submitted.');
     }

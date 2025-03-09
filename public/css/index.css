@@ -1562,3 +1562,28 @@ select.form-select option {
           }
       }
   }
+
+
+
+
+  /* resources/css/app.css */
+.document-alert {
+    background: #fff3cd;
+    padding: 15px;
+    border-left: 5px solid #ffc107;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.document-alert a {
+    color: #856404;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.document-alert i {
+    font-size: 1.2rem;
+    color: #856404;
+}

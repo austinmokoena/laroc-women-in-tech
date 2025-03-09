@@ -18,7 +18,7 @@
             <td>{{ $application->status }}</td>
             <td>{{ $application->created_at->format('d M Y') }}</td>
             <td>
-                <form method="POST" action="{{ route('admin.applications.updateStatus', $application) }}" class="d-inline">
+                <form method="POST" action="{{ route('admin.applications.updateStatus', $application) }}">
                     @csrf
                     @method('PUT')
                     <div class="btn-group">
@@ -26,6 +26,12 @@
                         <button type="submit" name="status" value="missing_documents" class="btn btn-warning btn-sm">Missing Docs</button>
                         <button type="submit" name="status" value="rejected" class="btn btn-danger btn-sm">Reject</button>
                     </div>
+                    @if($application->status === 'rejected')
+                    <div class="mt-2">
+                        <textarea name="rejection_reason" class="form-control" 
+                                  placeholder="Optional rejection reason"></textarea>
+                    </div>
+                    @endif
                 </form>
             </td>
         </tr>

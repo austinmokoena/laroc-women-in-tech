@@ -52,16 +52,16 @@
             <div
                 class="tw-mt-8 tw-flex tw-flex-col tw-place-items-center tw-gap-5"
             >
-            @if(auth()->check())
-            @php
-                $registration = auth()->user()->programRegistration;
-            @endphp
-            @if($registration && (is_null($registration->id_document) || is_null($registration->proof_of_address)))
-                <div class="alert alert-warning" style="padding: 10px; background-color: #f8d7da; color: #721c24;">
-                    Outstanding Documents: Please upload your ID Document and Proof of Address. <a href="{{ route('womenintech.storeDocuments')}}"><b>Upload</b></a>
+            @auth
+                @if(auth()->user()->needsDocumentUpload())
+                <div class="document-alert">
+                    <i class="fa fa-exclamation-circle"></i>
+                    <p style="color: rgb(85, 85, 85)">You have outstanding documents to upload.</p> 
+                    <a href="{{ route('womenintech.documents') }}">Complete your application now</a>.
                 </div>
-            @endif
-        @endif
+                @endif
+            @endauth
+
                 <div
                     class="reveal-up tw-mt-5 tw-flex tw-flex-col tw-gap-3 tw-text-center"
                 >

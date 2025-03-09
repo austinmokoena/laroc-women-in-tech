@@ -10,7 +10,7 @@
             </a>
             <div
                 class="collapsible-header animated-collapse max-lg:tw-shadow-md"
-                id="collapsed-header-items" style="width: auto; height:100%"
+                id="collapsed-header-items" 
             >
                 <div
                     class="tw-flex tw-h-full tw-w-max tw-gap-5 tw-text-base max-lg:tw-mt-[30px] max-lg:tw-flex-col max-lg:tw-place-items-end max-lg:tw-gap-5 lg:tw-mx-auto lg:tw-place-items-center"
@@ -50,19 +50,20 @@
                             @endauth
                     @endif
                 </div>
+                <a class="header-links" href="{{ route('womenintech.register') }}"> <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                        this.closest('form').submit();" class="tw-rounded-full tw-bg-white tw-px-3 tw-py-2 tw-text-black tw-transition-transform tw-duration-[0.3s] hover:tw-translate-x-2">
+                        Logout
+                    </a>
+                </form> </a>
                 <div
                     class="tw-mx-4 tw-flex tw-place-items-center tw-gap-[20px] tw-text-base max-md:tw-w-full max-md:tw-flex-col max-md:tw-place-content-center"
                 >
                 <i class="bi bi-arrow-left"></i>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-
-                        <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                            this.closest('form').submit();" class="tw-rounded-full tw-bg-white tw-px-3 tw-py-2 tw-text-black tw-transition-transform tw-duration-[0.3s] hover:tw-translate-x-2">
-                            Logout
-                        </a>
-                    </form>
+                    
                         
                     
                 </div>

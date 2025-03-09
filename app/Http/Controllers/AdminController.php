@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\ProgramRegistration;
+use App\Notifications\ApplicationAccepted;
+use App\Notifications\ApplicationRejected;
 
 class AdminController extends Controller
 {
@@ -67,10 +69,21 @@ class AdminController extends Controller
     public function updateStatus(Request $request, ProgramRegistration $application)
     {
         $request->validate([
-            'status' => 'required|in:accepted,missing_documents,rejected'
+            'status' => 'required|in:accepted,missing_documents,rejected',
+            'rejection_reason' => 'nullable|string|max:255' // Add this
         ]);
 
+        $previousStatus = $application->status;
         $application->update(['status' => $request->status]);
+
+        // Send notifications
+        $user = $application->user;
+        
+        if ($request->status === 'accepted') {
+            $user->notify(new ApplicationAccepted());
+        } elseif ($request->status === 'rejected') {
+            $user->notify(new ApplicationRejected($request->rejection_reason));
+        }
 
         return redirect()->back()->with('success', 'Status updated successfully.');
     }

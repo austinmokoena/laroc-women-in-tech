@@ -52,4 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(ProgramRegistration::class);
     }
 
+    public function needsDocumentUpload()
+    {
+        return $this->programRegistrations()
+            ->whereNull('status') // Status remains null until documents are uploaded
+            ->exists();
+    }
+
 }
